@@ -2,22 +2,6 @@
 # Unique Oracle SQL & PL/SQL Features Cheat Sheet
 
 This document covers powerful features unique to Oracle that are useful in both APEX and general database development.
----
-
-## 📦 Oracle Built-in Packages
-
-Oracle provides many built-in PL/SQL packages that expose powerful functionality through procedural APIs.
-
-### 🔧 General Utility Packages
-
-| Package          | Purpose                                      | Example                                       |
-|------------------|----------------------------------------------|-----------------------------------------------|
-| `DBMS_OUTPUT`    | Debug output in SQL Developer/APEX           | `DBMS_OUTPUT.PUT_LINE('Hello');`              |
-| `UTL_FILE`       | Read/write files on server                   | `UTL_FILE.PUT_LINE(file, 'data');`            |
-| `UTL_MAIL`       | Send emails via PL/SQL                       | `UTL_MAIL.SEND(...)`                          |
-| `UTL_HTTP`       | Make HTTP requests                           | `UTL_HTTP.REQUEST('http://api.com')`          |
-| `DBMS_SQL`       | Execute dynamic SQL                          | `DBMS_SQL.PARSE(...);`                        |
-| `DBMS_SCHEDULER` | Schedule jobs/scripts                         | `DBMS_SCHEDUL
 
 ---
 
