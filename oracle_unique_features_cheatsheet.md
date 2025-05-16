@@ -307,3 +307,115 @@ END;
 
 *Packages are one of Oracle PL/SQL's most powerful and unique offerings. No direct equivalent exists in MySQL, PostgreSQL, or SQL Server.*
 
+
+---
+
+## 🚀 Additional Oracle-Only Features (Advanced)
+
+These powerful features are exclusive to Oracle and useful in advanced database design, security, and performance optimization.
+
+---
+
+### 🧭 Edition-Based Redefinition (EBR)
+
+Supports **zero-downtime upgrades** by allowing multiple versions of packages, views, and synonyms.
+
+```sql
+-- Switch to a different edition (code version) at the session level
+ALTER SESSION SET EDITION = my_new_edition;
+```
+
+- Enables hot deployment of application changes.
+- Useful in large-scale enterprise systems.
+
+---
+
+### 🧠 Result Cache
+
+Oracle can cache the results of SQL or PL/SQL function calls to improve performance.
+
+```sql
+CREATE OR REPLACE FUNCTION get_product_name(p_id NUMBER)
+RETURN VARCHAR2
+RESULT_CACHE
+IS
+  v_name VARCHAR2(100);
+BEGIN
+  SELECT name INTO v_name FROM products WHERE product_id = p_id;
+  RETURN v_name;
+END;
+```
+
+- Automatically caches and reuses query results.
+- Great for read-heavy operations.
+
+---
+
+### 🧱 Index-Organized Tables (IOTs)
+
+Tables where data is stored within a **B-tree index**, not as a separate heap.
+
+```sql
+CREATE TABLE employees (
+  emp_id NUMBER PRIMARY KEY,
+  name   VARCHAR2(50)
+) ORGANIZATION INDEX;
+```
+
+- Faster access for primary key lookups.
+- Ideal for small, lookup-heavy tables.
+
+---
+
+### 🗃 Global Temporary Tables (GTTs)
+
+Temporary tables scoped to a **session or transaction** — data is automatically purged.
+
+```sql
+CREATE GLOBAL TEMPORARY TABLE temp_orders (
+  order_id NUMBER,
+  product_id NUMBER
+) ON COMMIT DELETE ROWS;
+```
+
+- Data is private to each session.
+- Useful for intermediate results or large calculations.
+
+---
+
+### 🔐 Fine-Grained Access Control (FGAC)
+
+Also known as **Row-Level Security**, this restricts data visibility per user without changing application code.
+
+```sql
+BEGIN
+  DBMS_RLS.ADD_POLICY(
+    object_schema    => 'HR',
+    object_name      => 'EMPLOYEES',
+    policy_name      => 'emp_policy',
+    function_schema  => 'HR',
+    policy_function  => 'fn_limit_access'
+  );
+END;
+```
+
+- Automatically filters rows based on session context or user.
+- Powerful for multi-tenant or secure systems.
+
+---
+
+### 🏗 Multi-Tenant Architecture (CDB/PDB)
+
+Oracle supports multiple **pluggable databases (PDBs)** inside one **container database (CDB)**.
+
+- Share infrastructure while isolating workloads.
+- Manage many applications under a single Oracle instance.
+
+```sql
+-- Example: switch to a pluggable database
+ALTER SESSION SET CONTAINER = pdb1;
+```
+
+---
+
+These features are exclusive to Oracle Enterprise-grade environments and are key differentiators for high-availability, secure, and scalable solutions.
